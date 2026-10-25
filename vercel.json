@@ -1,0 +1,45 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "app": {
+      "root": ".",
+      "runtime": "python",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "api-server",
+          "format": "url",
+          "env": "API_SERVER_URL"
+        }
+      ]
+    },
+    "api-server": {
+      "root": "artifacts/api-server",
+      "framework": "express"
+    },
+    "mockup-sandbox": {
+      "root": "artifacts/mockup-sandbox",
+      "framework": "vite"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "api-server"
+      }
+    },
+    {
+      "source": "/mockup/(.*)",
+      "destination": {
+        "service": "mockup-sandbox"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "app"
+      }
+    }
+  ]
+}
