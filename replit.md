@@ -1,9 +1,11 @@
-# [Project name]
+# UrbanHeat Analytics
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+An applied data analysis dashboard for exploring documented Mumbai urban-heat observations from user-uploaded CSV files.
 
 ## Run & Operate
 
+- `streamlit run app.py --server.port 5000 --server.address 0.0.0.0 --server.headless=true --browser.gatherUsageStats=false` — run the UrbanHeat Analytics dashboard
+- `python -m unittest discover -s tests -v` — run focused data-preparation and statistics tests
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
@@ -13,6 +15,7 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Stack
 
+- Python 3.13, Streamlit, pandas, NumPy, Plotly
 - pnpm workspaces, Node.js 24, TypeScript 5.9
 - API: Express 5
 - DB: PostgreSQL + Drizzle ORM
@@ -22,15 +25,20 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `app.py` — Streamlit interface and charts
+- `analysis.py` — CSV parsing, validation, and testable analysis functions
+- `tests/test_analysis.py` — focused standard-library unit tests
+- `requirements.txt` — Python runtime dependencies
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Keep the original uploaded CSV separate from a derived analytical view; retain all rows in downloads.
+- Use only local CSV uploads in the initial version; source facts and dataset metadata are documented rather than fetched or inferred.
+- Analyze one explicitly selected temperature measure at a time and never combine incompatible heat metrics.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+UrbanHeat Analytics supports a college research project on urban heat inequality in Mumbai. It validates uploaded observations and provides data-derived temperature, date, category, vegetation, and coordinate analyses when the required documented fields are available. Do not add fabricated observations or findings.
 
 ## User preferences
 
@@ -38,7 +46,7 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- The Streamlit app uses port 5000. Do not start the unused API-server workflow at the same time; it also binds port 5000.
 
 ## Pointers
 

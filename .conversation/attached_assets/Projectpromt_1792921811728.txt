@@ -1,0 +1,271 @@
+Build UrbanHeat Analytics — Research-Grade Applied Data Analysis Dashboard
+
+Act as a pragmatic senior software engineer, data analyst, and UI designer. Build a polished, functional student research application called UrbanHeat Analytics.
+
+Follow a Ponytail-style engineering approach: write the smallest correct solution, inspect the existing project before changing files, reuse working code and installed dependencies, avoid unnecessary abstractions, and test important logic. Do not sacrifice correctness, data integrity, accessibility, or error handling to reduce code.
+
+1. Research objective
+
+Project title: Urban Heat Inequality in Mumbai
+
+Research question:
+How do land-surface temperatures vary across the selected urban study area, and what relationships exist between temperature, vegetation, location, and time?
+
+The project is for a college Applied Data Analysis mini-project. It must demonstrate authentic data preparation, exploratory data analysis, statistical analysis, visualization, and evidence-based interpretation.
+
+This is a research dashboard, not a weather forecast application and not a generic analytics template.
+
+2. Technology and scope
+
+Use:
+
+- Python
+- Streamlit
+- Pandas
+- NumPy only where useful
+- Plotly Express and Plotly Graph Objects for interactive visualizations
+- Python's standard library for simple utilities and tests
+
+Keep the initial architecture small. Prefer a clear "app.py", a minimal "requirements.txt", and a small test file if needed. Introduce additional modules only when they make the code genuinely easier to understand or test.
+
+Do not add React, a separate API server, a database, login, an elaborate folder hierarchy, a custom map engine, paid services, or unnecessary dependencies.
+
+The application must run in Replit using its supported Python workflow.
+
+3. Engineering rules — Ponytail style
+
+Before coding:
+
+1. Inspect the starter project, existing files, dependencies, and available execution setup.
+2. Reuse suitable existing code instead of replacing working components.
+3. Identify the smallest implementation that satisfies the requirements.
+
+During coding:
+
+- Prefer simple functions and existing library capabilities.
+- Avoid speculative features and unnecessary configuration systems.
+- Do not create helper functions that are used only once unless they improve clarity or testability.
+- Validate untrusted uploaded data and handle failures gracefully.
+- Write small tests for nontrivial data-transformation and statistical logic.
+- Keep the interface and analysis code understandable for a CS student.
+- Never claim tests passed unless you actually ran them.
+
+After coding:
+
+- Run the application.
+- Run available tests.
+- Inspect and fix runtime errors, incorrect calculations, and broken interactions.
+- Report what was tested, what remains incomplete, and any important risks.
+
+4. Research data integrity — highest priority
+
+Potential primary source:
+BHRIGU National Heat+ Explorer
+https://bhrigu.cstep.in/
+
+Potential supplementary source:
+USGS Landsat Collection 2 Surface Temperature
+https://www.usgs.gov/landsat-missions/landsat-collection-2-surface-temperature
+
+Use documented data sources. Verify the actual availability, geographic coverage, time range, units, resolution, and download options of the data selected for analysis.
+
+Do not assume either source exposes a public CSV download or API. Do not invent endpoints, scrape restricted services, or silently substitute simulated data.
+
+The first version must support uploading a locally downloaded CSV file. The app should clearly explain how to obtain and import the research data.
+
+STRICT RULES:
+
+- Never invent or randomly generate temperatures, locations, dates, vegetation measurements, statistics, or findings.
+- Never create fake historical observations to make charts look populated.
+- Do not hardcode example findings or misleading KPI values.
+- When no real data is loaded, show an informative empty state instead of fabricated metrics.
+- Label all data using its genuine provenance and known limitations.
+- Distinguish measured observations from calculated statistics.
+- Preserve the original uploaded data and make cleaning decisions transparent.
+- Never claim that correlation proves causation.
+
+5. Interface and visual design
+
+Create a professional environmental analytics interface with:
+
+- A light, neutral background.
+- Dark forest-green accents.
+- Restrained orange and red temperature indicators.
+- Clean typography, balanced spacing, consistent chart styling, and accessible contrast.
+- A compact sidebar and responsive main content area.
+- Clear loading, empty, success, warning, and error states.
+- No excessive gradients, decorative animations, or unnecessary cards.
+
+Header:
+UrbanHeat Analytics
+
+Subtitle:
+Exploring urban heat patterns through data
+
+Display a small research label:
+Applied Data Analysis | Mumbai, India
+
+Provide these sections:
+
+1. Research Overview
+2. Temperature Analysis
+3. Vegetation Analysis
+4. Geographic Explorer
+5. Data Explorer
+6. Methodology & Sources
+
+Use Streamlit navigation, tabs, or the simplest native option that produces a clear experience. Do not implement custom routing unnecessarily.
+
+6. Research Overview
+
+Explain the research question and project objectives.
+
+When valid real data is loaded, show applicable summary metrics such as:
+
+- Number of usable observations.
+- Number of missing or invalid temperature values.
+- Date coverage, if dates exist.
+- Mean and median temperature.
+- Minimum and maximum temperature.
+- Number of unique locations, if a location identifier exists.
+
+Calculate every metric from the currently loaded dataset.
+
+Only display metrics for which the necessary valid data exists. Show units beside temperature values.
+
+Include a compact description of the loaded dataset and its source. Do not present a global average as a Mumbai statistic or combine incompatible temperature measures.
+
+7. Data import and validation
+
+Implement robust CSV uploading.
+
+After upload:
+
+- Display a preview of the original dataset.
+- Show available column names and inferred data types.
+- Report row count, column count, duplicate rows, missing values, and invalid values.
+- Let the user select the relevant temperature, date, location, latitude, longitude, and vegetation columns.
+- Do not assume that column names are identical across datasets.
+- Validate selected columns and identify unsupported types.
+- Provide clear warnings when fields are absent.
+- Allow downloading a cleaned copy as CSV.
+
+Keep raw observations separate from the cleaned analytical view. Do not silently discard rows or permanently change the uploaded source data.
+
+Initially support CSV only. Avoid adding Excel, databases, and remote integrations unless they are necessary.
+
+8. Temperature Analysis
+
+Create analyses that operate on the selected valid temperature column.
+
+Include:
+
+- Descriptive statistics.
+- Interactive temperature distribution histogram.
+- A box plot for examining spread and potential outliers.
+- A time-series line chart if valid dates exist.
+- Location or category comparisons if suitable fields exist.
+- Optional date and category filters when supported by the data.
+- A short interpretation calculated from the displayed data.
+
+Before aggregating observations, check their measurement definitions and units.
+
+Never combine air temperature, land-surface temperature, heat index, or other heat metrics as though they were interchangeable.
+
+Do not compare unmatched seasons or measurement periods without explaining the limitation. Do not assume that a change in satellite surface temperature directly measures the change in human heat exposure.
+
+9. Vegetation Analysis
+
+If the dataset has a documented vegetation metric such as NDVI and compatible temperature observations, implement:
+
+- A scatter plot of vegetation versus surface temperature.
+- Pearson or Spearman correlation, where appropriate.
+- Sample size and missing-value information.
+- An optional trend line with a clear explanation.
+- A cautious interpretation of the observed association.
+
+Do not automatically infer vegetation values from location names.
+
+If vegetation measurements are missing, explain how a compatible vegetation dataset would be needed to conduct this analysis. Keep unrelated analyses usable.
+
+10. Geographic Explorer
+
+Use actual coordinates or valid geographical data from the uploaded source.
+
+For the initial version, use a Plotly coordinate scatter plot when valid latitude, longitude, and temperature fields exist. Color the observations by their real temperature values and include a useful hover display.
+
+Validate geographic coordinates and identify invalid rows.
+
+Do not create fictitious neighbourhood boundaries, assign arbitrary values to Mumbai areas, or imply that a handful of points represents the entire city.
+
+Do not require paid mapping keys. If suitable geographic data is unavailable, explain what data is missing instead of displaying a misleading map.
+
+11. Data Explorer
+
+Provide:
+
+- A searchable or filterable table of uploaded observations using suitable native controls.
+- Dataset shape and column information.
+- Missing-value summaries.
+- Duplicate-row information.
+- A transparent summary of any cleaning decisions.
+- A CSV download for the resulting cleaned analytical dataset.
+
+Keep the interface manageable for datasets of ordinary student-project size. Avoid custom data-grid libraries unless necessary.
+
+12. Methodology and sources
+
+Create a dedicated section documenting:
+
+- Research question and objectives.
+- Study area and selected period.
+- Original data source and source link.
+- Dataset acquisition date, when known.
+- Units, definitions, spatial resolution, and temporal resolution, when documented.
+- Data-cleaning operations.
+- Statistical methods.
+- Assumptions and limitations.
+- Missing or unavailable fields that prevent certain analyses.
+
+Clearly distinguish verified dataset facts, calculated results, interpretations, and planned future work.
+
+Add citation links to the original providers. Do not invent publication titles, researchers, dataset metadata, or references.
+
+13. Testing and acceptance criteria
+
+Add a small number of focused tests for the core analysis functions using Python's standard library where practical.
+
+Test at least:
+
+- A valid CSV containing temperature observations.
+- An empty CSV or empty dataset.
+- Missing required columns.
+- Missing and non-numeric temperature values.
+- Invalid date values.
+- Invalid geographic coordinates.
+- The absence of a vegetation column.
+- Correct calculation of summary statistics on a known test input.
+
+Synthetic values may be used inside isolated unit tests only; never display them as research observations in the live dashboard.
+
+The project is acceptable when:
+
+1. It launches successfully in Replit.
+2. The user can upload a real CSV and inspect the data.
+3. Statistics and charts are calculated from valid uploaded observations.
+4. Missing or unsupported fields produce helpful messages instead of crashes.
+5. Geographic and vegetation analyses appear only when suitable data exists.
+6. The methodology and data-source links are visible.
+7. No fabricated findings appear in the dashboard.
+
+14. Deliver the working application
+
+Implement the application, not merely a screenshot or static mockup.
+
+Begin with a working upload-to-analysis workflow, then add the visual design and optional analyses. Prefer completed essential features over many unfinished features.
+
+Do not stop after creating the interface. Run the code, validate the main workflow, and fix straightforward issues before declaring it complete.
+
+At completion, provide a concise summary of the implemented features, the files created or changed, the tests actually run, how to launch the app, and the exact next step for loading the real Mumbai research dataset.
+
+Important final instruction: Optimize for the smallest reliable, understandable, research-grade solution. Do not overengineer.

@@ -1,0 +1,1 @@
+- [Streamlit workflow startup](streamlit-workflow-startup.md) — headless mode prevents the first-run email prompt from blocking port startup.
