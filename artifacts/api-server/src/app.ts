@@ -29,6 +29,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Support both /api prefix routes and direct rewrites
 app.use("/api", router);
+app.use("/", router);
 
 export default app;
