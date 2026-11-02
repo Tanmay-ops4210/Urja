@@ -1,0 +1,38 @@
+# Node / pnpm
+node_modules/
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.npmrc
+.pnpm-store/
+
+# Python dev artifacts
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+tests/
+uv.lock
+pyproject.toml
+
+# Replit / IDE
+.replit
+.replitignore
+.replit-artifact/
+.conversation/
+.agents/
+
+# Artifacts / scaffolding
+artifacts/
+lib/
+scripts/
+
+# Docs / configs not needed in image
+replit.md
+README.md
+*.md
+tsconfig*.json
+vercel.json
+
+# Git
+.git/
+.gitignore
